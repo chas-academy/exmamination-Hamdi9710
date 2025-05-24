@@ -14,9 +14,11 @@ function updateBalance(){
     const totalIncome =income.reduce((sum,trans)=>sum+ trans.amount,0);
     const totalExpenses = expenses.reduce((sum,trans)=>sum+ trans.amount,0);
     const total = totalIncome-totalExpenses;
-
-    const balance= document.getElementById('balance');
-    balance.textContent= total+" kr";
+if(typeof document!='undefined'){
+   const balance= document.getElementById('balance');
+   if(balance) balance.textContent= `${total}kr`; 
+}
+    
 }
 
 function addTransaction(type){
@@ -30,10 +32,10 @@ if(!description|| isNaN(value)){
 
  if(type==='income'){
      income.push(transaction);
-        incomeList.innerHTML+=`<li>${description}: ${value} kr</li>`;  
+        incomeList.innerHTML+=`<li>${description}: ${value} kr(Inkomst)</li>`;  
     }  else{
         expenses.push(transaction);
-        expenseList.innerHTML+=`<li>${description}: ${value} kr</li>`; 
+        expenseList.innerHTML+=`<li>${description}: ${value} kr(Utgift)</li>`; 
     }
 
     transactionList.innerHTML+=`<li>${type.toUpperCase()}: ${description}- ${value} kr</li>`;  
